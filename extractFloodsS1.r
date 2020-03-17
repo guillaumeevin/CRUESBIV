@@ -4,8 +4,8 @@
 ###  IRSTEA
 ### guillaume.evin@inrae.fr
 ### 
-### Evin & Piton (Mars 2020): Codes développés dans le cadre de l'action SNRH CrueBiv - INRAE, UR ETNA
-### "Analyse bivariée des liens entre magnitude et durée des crues en zones Alpine et Pyrénéenne"
+### Evin & Piton (Mars 2020): Codes d?velopp?s dans le cadre de l'action SNRH CrueBiv - INRAE, UR ETNA
+### "Analyse bivari?e des liens entre magnitude et dur?e des crues en zones Alpine et Pyr?n?enne"
 ###=====================================================================================================
 
 ###__________________
@@ -21,7 +21,7 @@ load(paste0(path.QtVarData,"Metadata.stations.RData"))
 nS = nrow(Metadata.stations)
 
 # stations code
-code.stations = Metadata.stations$Code
+code.station = Metadata.stations$Code
 
 
 #======================================================================
@@ -29,7 +29,7 @@ code.stations = Metadata.stations$Code
 vecLength = vecPeriodCovered = vector(length=nS)
 for(iSt in 1:nS){
   # long RData
-  load(paste0('./DGPR_CruesBivariees/DATA/DATACRUES/S0/',code.station[iSt],'/DFcrues.RData'))
+  load(paste0(path.datacrues,'S0/',code.station[iSt],'/DFcrues.RData'))
   # number of floods: one row per flood in df.crues
   vecLength[iSt] = nrow(df.crues)
   vecPeriodCovered[iSt] = as.numeric(diff(range(as.Date(df.crues$td))))/365.25

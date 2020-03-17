@@ -4,15 +4,15 @@
 ###  IRSTEA
 ### guillaume.evin@inrae.fr
 ### 
-### Evin & Piton (Mars 2020): Codes développés dans le cadre de l'action SNRH CrueBiv - INRAE, UR ETNA
-### "Analyse bivariée des liens entre magnitude et durée des crues en zones Alpine et Pyrénéenne"
+### Evin & Piton (Mars 2020): Codes d?velopp?s dans le cadre de l'action SNRH CrueBiv - INRAE, UR ETNA
+### "Analyse bivari?e des liens entre magnitude et dur?e des crues en zones Alpine et Pyr?n?enne"
 ###=====================================================================================================
 
 ###__________________________
 ### FitBivDist_ExtremeFloods.R
 ###__________________________
-### Code ajustement des distributions bivariéees sur l'ensemble de crues S1 
-### (128 stations présentant des chroniques >25 ans et au moins 2 crues par an en moyenne)
+### Code ajustement des distributions bivari?ees sur l'ensemble de crues S1 
+### (128 stations pr?sentant des chroniques >25 ans et au moins 2 crues par an en moyenne)
 
 
 # REFERENCES
@@ -23,14 +23,6 @@
 #Salvadori, G., G. R. Tomasicchio, and F. D'Alessandro. 2014. "Practical Guidelines for Multivariate Analysis and 
 #Design in Coastal and Off-Shore Engineering." Coastal Engineering 88 (June): 1-14. 
 #https://doi.org/10.1016/j.coastaleng.2014.01.011.
-
-
-# load libraries
-library(fitdistrplus)
-library(VineCopula)
-library(lmomco)
-library(ismev)
-library(evd)
 
 
 #======================================================================
@@ -51,7 +43,7 @@ code.station = Metadata.stations.S1$Code
 # sequence of probabilities
 seqt = seq(0.001, 1, 0.001)
 
-# isoproba associée à un niveau de retour
+# isoproba associ?e ? un niveau de retour
 Pk = PkBar = matrix(nrow=nS,ncol=length(seqt))
 
 # list of data used for the fitting
@@ -117,7 +109,7 @@ for(iSt in 1:nS){
   X[,2] = qgamma(p = U[,2],shape = fitD$estimate[1], rate = fitD$estimate[2])
   
   # Serinaldi (2015) Eq 15: Pk = 1-Kc(t), avec Kc(t) = t-lambda(t), see also ?BiCopLambda
-  # ->Pk(t) = 1-t+lambda(t), lambda est donné par la fonction BiCopLambda
+  # ->Pk(t) = 1-t+lambda(t), lambda est donn? par la fonction BiCopLambda
   Pk[iSt,] = 1 - seqt + BiCopLambda(cop, PLOT = FALSE)$theoLambda
   
   # +10 to get the corresponding survival copula, except for the Frank copula for which the survival copula is the same
